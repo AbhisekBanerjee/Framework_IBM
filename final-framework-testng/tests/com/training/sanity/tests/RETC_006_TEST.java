@@ -48,6 +48,10 @@ public class RETC_006_TEST {
 		// open the browser
 		driver.get(baseUrl);
 		act = new Actions(driver);
+	
+		
+		
+		
 		
 	}
 

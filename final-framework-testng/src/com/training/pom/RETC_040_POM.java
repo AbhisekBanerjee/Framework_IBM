@@ -1,38 +1,25 @@
 package com.training.pom;
 
-import static org.testng.Assert.assertEquals;
-
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 import java.util.concurrent.TimeUnit;
-
-import org.apache.poi.util.SystemOutLogger;
-import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.Select;
 
-public class RETC_039_POM {
-
+public class RETC_040_POM {
 	String s1 = null;// this will be used to capture catagoryName and later will
 	// be used to create dynamic xpath
-
 	private WebDriver driver;
 
-	public RETC_039_POM(WebDriver driver) {
+	public RETC_040_POM(WebDriver driver) {
 		this.driver = driver;
 		PageFactory.initElements(driver, this);
-		
 	}
 
 	// locator and method of user name
-
 	@FindBy(xpath = "//input[@id='user_login']")
 	private WebElement we_USRNM;
 
@@ -42,7 +29,6 @@ public class RETC_039_POM {
 	}
 
 	// locator and method of password
-
 	@FindBy(xpath = "//input[@id='user_pass']")
 	private WebElement we_PWD;
 
@@ -52,7 +38,6 @@ public class RETC_039_POM {
 	}
 
 	// locator and method of submit
-
 	@FindBy(xpath = "//input[@value='Sign In']")
 	private WebElement we_Sbmt;
 
@@ -61,7 +46,6 @@ public class RETC_039_POM {
 	}
 
 	// Locators and method of Post
-
 	@FindBy(linkText = "Posts")
 	private WebElement PostsLink;
 
@@ -78,7 +62,6 @@ public class RETC_039_POM {
 	}
 
 	// Locators and method of Category
-
 	@FindBy(linkText = "Categories")
 	private WebElement CategoriesLink;
 
@@ -94,7 +77,6 @@ public class RETC_039_POM {
 		this.s1 = catgName;
 		this.catgName.clear();
 		this.catgName.sendKeys(catgName);
-
 	}
 
 	// Locators and method of CategorySlug
@@ -107,7 +89,6 @@ public class RETC_039_POM {
 	}
 
 	// Locators and method of CategoryDescription
-
 	@FindBy(id = "tag-description")
 	private WebElement catgDescrp;
 
@@ -134,7 +115,6 @@ public class RETC_039_POM {
 	}
 
 	// Locators and method of AddNewPost
-
 	@FindBy(xpath = "//*[@id=\"wpbody-content\"]/div[3]/a")
 	private WebElement addnewPostBtn;
 
@@ -147,94 +127,56 @@ public class RETC_039_POM {
 	private WebElement PostTitleBox;
 
 	public void enterPostTitle(String title) {
-
 		// this.PostTitleBox.sendKeys(title);
-
-		
-			Actions actions1 = new Actions(driver);
-			actions1.moveToElement(PostTitleBox);
-			actions1.click();
-			actions1.sendKeys(title);
-			actions1.build().perform();
-			
+		Actions actions1 = new Actions(driver);
+		actions1.moveToElement(PostTitleBox);
+		actions1.click();
+		actions1.sendKeys(title);
+		actions1.build().perform();
 	}
-	
-	public void getAlert(){
-		try {
-			Thread.sleep(3000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		Alert alt = driver.switchTo().alert();
-		
-		alt.dismiss();
-	}
-
 
 	// Locators and method of ContentBox
-	@FindBy(xpath = "//body[@id='tinymce']")
+	@FindBy(id = "content")
 	private WebElement PostContentBox;
 
 	public void enterPostContent(String contnt) {
-		driver.switchTo().frame("content_ifr");
 		Actions actions2 = new Actions(driver);
 		actions2.moveToElement(PostContentBox);
 		actions2.click();
 		actions2.sendKeys(contnt);
 		actions2.build().perform();
-		driver.switchTo().parentFrame();
 	}
 
 	// Locators and method of checkbox
-
 	// label[text()=' Test_039_CatName']/input
-	// ul[@id='categorychecklist']/li[last()-1]/label/input
-	
-	
-	
-	
-	@FindBy(xpath = "//label[text()=' Test_039_CatName']/input") // xpath to
-	// given
-	// depending
-	// on the
-	// name of
-	// the
-	// category
-	// created
+	// ul[@id='categorychecklist']/li/label/input
+	@FindBy(xpath = "//label[text()=' Test_039_CatName']/input") // xpath to be
+																	// given
+																	// depending
+																	// on the
+																	// name of
+																	// the
+																	// category
+																	// created
 	private WebElement categoryCheckBox;
 
 	public void clickCatgChkBox() {
-		
-		Select sel = new Select(driver.findElement(By.xpath("//*[@id='newcategory_parent']")));
-		
-		/*List al;
-		al=driver.findElements(By.xpath("//*[@id='newcategory_parent']/*"));
-		//System.out.println(al);
-		int count= al.size();*/
-		/*System.out.println(sel.getOptions().size());
-		Object [][]arr = new Object[sel.getOptions().size()][2];
-		//List al=null;
-		for (int i =0; i<sel.getOptions().size();i++){
-			//al.add(i, sel.getOptions().get(i));
-			arr[i][1]=(Object)sel.getOptions().get(i).getAttribute("value");
-		}
-		for (int i =0; i<sel.getOptions().size();i++){
-			System.out.println(al.get(i));//al.add(i, sel.getOptions().get(i));
-		}*/
-		
 		this.categoryCheckBox.click();
 	}
 
 	// Locators and method of publish
-
 	@FindBy(id = "publish")
+	// @FindBy(xpath = "//input[@id='publish' and @name='publish' and
+	// @type='submit' and @value='Publish']")
 	private WebElement PublishBtn;
 
 	public void clickPublishButton() {
-		
-		this.PublishBtn.click();
-			}
+		Actions act = new Actions(driver);
+		act.moveToElement(this.PublishBtn).build().perform();
+		act.click();
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		// this.PublishBtn.click();
+	}
 
 	// Locators and method of publish
 	@FindBy(xpath = "//span[@id='post-status-display']")
@@ -245,4 +187,19 @@ public class RETC_039_POM {
 		return this.SuccessMsg.getText();
 	}
 
+	// Locators and method of View Post Link
+	@FindBy(linkText = "View post")
+	private WebElement ViewPostLink;
+
+	public void clickViewPostLink() {
+		this.ViewPostLink.click();
+	}
+
+	// Locators and method of View Post Message
+	@FindBy(id = "not-found") // Error 404 is coming
+	private WebElement ViewPostMsg;
+
+	public Boolean getViewPostMsg() {
+		return this.ViewPostMsg.isDisplayed();
+	}
 }

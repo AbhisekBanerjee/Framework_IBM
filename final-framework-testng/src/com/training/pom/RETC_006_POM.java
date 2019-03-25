@@ -1,6 +1,5 @@
 package com.training.pom;
 
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -16,7 +15,7 @@ public class RETC_006_POM {
 		PageFactory.initElements(driver, this);
 		
 	}
-	JavascriptExecutor jse = (JavascriptExecutor)driver;
+	
 	
 	@FindBy(xpath = "//ul[@id='responsive']//a[@class='sign-in']") // finding
 	// login

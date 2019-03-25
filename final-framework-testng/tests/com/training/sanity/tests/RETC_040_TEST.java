@@ -1,31 +1,30 @@
 package com.training.sanity.tests;
 
 import static org.testng.Assert.assertEquals;
-
+import static org.testng.Assert.assertTrue;
 import java.io.FileInputStream;
 import java.util.Properties;
-
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
-
 import com.training.generics.ScreenShot;
-import com.training.pom.RETC_039_POM;
+import com.training.pom.RETC_040_POM;
 import com.training.utility.DriverFactory;
 import com.training.utility.DriverNames;
 
-public class RETC_039_TEST {
-
+public class RETC_040_TEST {
 	private static Properties properties;
 	private WebDriver driver;
 	private String adminUrl;
 	private ScreenShot screenShot;
-	private RETC_039_POM pomOBJ;
+	private RETC_040_POM pomOBJ;
 	String prntTab;
 	Double rndm = Math.random();
 	WebDriverWait wait;
+	private String expected = "Post published. View post\n" + "Dismiss this notice.";
+	private String actual;
 
 	@BeforeSuite
 	public void bfrSuit() throws Throwable {
@@ -37,7 +36,7 @@ public class RETC_039_TEST {
 	@BeforeTest
 	public void bftTest() {
 		driver = DriverFactory.getDriver(DriverNames.CHROME);
-		pomOBJ = new RETC_039_POM(driver);
+		pomOBJ = new RETC_040_POM(driver);
 		adminUrl = properties.getProperty("adminURL");
 		screenShot = new ScreenShot(driver);
 		driver.get(adminUrl);
@@ -45,7 +44,6 @@ public class RETC_039_TEST {
 		pomOBJ.setUSRNM("admin");
 		pomOBJ.setPWD("admin@123");
 		pomOBJ.clkSBMT();
-
 	}
 
 	@Test(priority = 1)
@@ -80,24 +78,27 @@ public class RETC_039_TEST {
 	@Test(priority = 6)
 	public void actionInAddNewPost() {
 		pomOBJ.enterPostTitle("Test_039_NewPost" + rndm);
-		
 		pomOBJ.enterPostContent("Test_039_Content" + rndm);
 	}
 
 	@Test(priority = 7)
 	public void clkOnChkBox() {
 		pomOBJ.clickCatgChkBox();
-
 	}
 
 	@Test(priority = 8)
-	public void clkOnPublish() throws InterruptedException {
-		
-		Thread.sleep(10000);
+	public void clkOnPublish() {
 		pomOBJ.clickPublishButton();
-		pomOBJ.getSuccessMsg();
+		actual = pomOBJ.getSuccessMsg();
 		// assertEquals(pomOBJ.getSuccessMsg(), "Published");
+		assertEquals(actual, expected);
+	}
 
+	@Test(priority = 9)
+	public void clkOnViewPost() {
+		pomOBJ.clickViewPostLink();
+		assertTrue(pomOBJ.getViewPostMsg()); // check whether error 404 is
+												// displayed or not
 	}
 
 }
