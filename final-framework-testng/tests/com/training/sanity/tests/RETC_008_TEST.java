@@ -14,6 +14,9 @@ import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import com.relevantcodes.extentreports.ExtentReports;
+import com.relevantcodes.extentreports.ExtentTest;
+import com.relevantcodes.extentreports.LogStatus;
 import com.training.generics.ScreenShot;
 import com.training.pom.RETC_007_POM;
 import com.training.pom.RETC_008_POM;
@@ -27,6 +30,8 @@ public class RETC_008_TEST {
 	private RETC_008_POM pomOBJ;
 	private static Properties properties;
 	private ScreenShot screenShot;
+	ExtentReports report;
+	ExtentTest test;
 
 	@BeforeSuite
 	public void bfrSuit() throws Throwable {
@@ -44,12 +49,16 @@ public class RETC_008_TEST {
 		// open the browser
 		driver.get(baseUrl);
 		Actions act = new Actions(driver);
+
+		report = new ExtentReports("./report/RETC_008.html");
+		test=report.startTest("ReportCard");
 	}
 
 	@Test(priority = 1)
 	public void clkOnAprtmntTbLnk() {
 		boolean flag1=pomOBJ.mouseHoverOnAprtmnt();
 		pomOBJ.clickOnLink();
+		test.log(LogStatus.INFO, "Step1", "Click On Apartment Tab Link");
 	}
 
 	@Test(priority = 2,dependsOnMethods="clkOnAprtmntTbLnk")

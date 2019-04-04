@@ -13,6 +13,7 @@ public class RETC_006_POM {
 	public RETC_006_POM(WebDriver driver) {
 		this.driver = driver;
 		PageFactory.initElements(driver, this);
+		//driver.manage().timeouts().implicitlyWait(arg0, arg1)
 		
 	}
 	

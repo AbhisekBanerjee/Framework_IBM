@@ -3,13 +3,13 @@
 <suite guice-stage="DEVELOPMENT" name="Failed suite [Default suite]">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="com.training.sanity.tests.RETC_039_TEST">
+      <class name="com.training.sanity.tests.RETC_007_TEST">
         <methods>
-          <include name="bftTest"/>
-          <include name="clkOnChkBox"/>
-          <include name="bfrSuit"/>
+          <include name="mouseHovertoAprt"/>
+          <include name="setUp"/>
+          <include name="setUpBeforeClass"/>
         </methods>
-      </class> <!-- com.training.sanity.tests.RETC_039_TEST -->
+      </class> <!-- com.training.sanity.tests.RETC_007_TEST -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

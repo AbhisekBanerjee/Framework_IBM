@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -17,14 +18,25 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import com.relevantcodes.extentreports.ExtentReports;
+import com.relevantcodes.extentreports.ExtentTest;
+import com.relevantcodes.extentreports.LogStatus;
 import com.training.generics.ScreenShot;
 import com.training.pom.RETC_006_POM;
 
 import com.training.utility.DriverFactory;
 import com.training.utility.DriverNames;
 
-public class RETC_006_TEST {
 
+
+
+
+public class RETC_006_TEST {
+	
+	
+	
+	static ExtentReports report;
+	static ExtentTest test;
 	private WebDriver driver;
 	private String baseUrl;
 	// private LoginPOM loginPOM;
@@ -37,6 +49,10 @@ public class RETC_006_TEST {
 		properties = new Properties();
 		FileInputStream inStream = new FileInputStream("./resources/others.properties");
 		properties.load(inStream);
+		//Extent Report
+		report = new ExtentReports("report//RETC_006.html");
+		test= report.startTest("RETC_006_ReportCard");
+		test.log(LogStatus.INFO, "Report Card Created");
 	}
 
 	@BeforeMethod
@@ -65,6 +81,7 @@ public class RETC_006_TEST {
 	public void clickLoginRegister() throws Throwable {
 		driver.manage().timeouts().implicitlyWait(1, TimeUnit.MINUTES);
 		ullPOM.clickLoginLink();
+		test.log(LogStatus.INFO, "Test Step 1.", "clickLoginLink()");
 		screenShot.captureScreenShot("RETC_006");
 
 		ullPOM.sendUserName("abhidasa");

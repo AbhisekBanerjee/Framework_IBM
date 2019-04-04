@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+import com.training.bean.EnqueryBean;
 import com.training.bean.LoginBean;
 import com.training.connection.GetConnection;
 import com.training.utility.LoadDBDetails;
@@ -40,9 +41,17 @@ public class ELearningDAO {
 			
 			while(gc.rs1.next()) {
 			
-				LoginBean temp = new LoginBean(); 
-				temp.setUserName(gc.rs1.getString(1));
-				temp.setPassword(gc.rs1.getString(2));
+				LoginBean temp = new LoginBean();
+				temp.setName(gc.rs1.getString(1));
+				temp.setEmail(gc.rs1.getString(2));
+				temp.setSubject(gc.rs1.getString(3));
+				temp.setMessage(gc.rs1.getString(4));
+			
+				
+				//temp.setUserName(gc.rs1.getString(1));
+				//temp.setPassword(gc.rs1.getString(2));
+				
+				
 
 				list.add(temp); 
 				
