@@ -1,5 +1,6 @@
 package com.training.pom;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -97,20 +98,17 @@ private WebDriver driver;
 		actions1.sendKeys(pTitle);
 		actions1.build().perform();
 		Thread.sleep(2000);
+		WebElement visualButton = this.driver.findElement(By.xpath("//button[@id='content-html']"));
+		visualButton.click();
+		Thread.sleep(2000);
 	}
 	
-	@FindBy(id="content_ifr")
+	@FindBy(xpath="//textarea[@class='wp-editor-area'and @id='content']")
 	private WebElement PropertyContentBox;              
 	public void enterPropertyContent(String pContent) {
-		/**this.driver.switchTo().frame(PropertyContentBox);
-		this.PropertyContentBox.clear();
+		String text =pContent;
 		this.PropertyContentBox.sendKeys(pContent);
-		**/
-		Actions actions2 = new Actions(driver);
-		actions2.moveToElement(PropertyContentBox);
-		actions2.click();
-		actions2.sendKeys(pContent);
-		actions2.build().perform();
+		
 	}
 	
 	@FindBy(xpath="//div[@id='publishing-action']/input[@type='submit']")

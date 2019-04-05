@@ -12,9 +12,13 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+
+import com.relevantcodes.extentreports.ExtentReports;
+import com.relevantcodes.extentreports.ExtentTest;
 import com.training.pom.RETC_070_POM;
 import com.training.utility.DriverFactory;
 import com.training.utility.DriverNames;
+import com.training.utility.ExtntRpt;
 
 public class RETC_070_TEST {
 
@@ -22,7 +26,15 @@ public class RETC_070_TEST {
 	private String adminUrl;
 	private RETC_070_POM retc70pom;
 	private static Properties properties;
-
+	
+	ExtntRpt rptOb = new ExtntRpt();
+	String d=System.getProperty("user.dir");
+	String repLoc=d+"\\report\\RETC_070.html";
+	
+	//ExtentReports reports = new ExtentReports("report//RETC_070.html");
+	//ExtentTest test = reports.startTest("ReportCard");
+	
+	
 	@Test
 	public void PublishFeature() throws InterruptedException {
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS); // implicit
@@ -30,6 +42,7 @@ public class RETC_070_TEST {
 
 		// login as admin
 		retc70pom.sendUsername("admin");
+		rptOb.getExtntRpt(repLoc, "ReportCard", "Pass", "Step-1", "Test");
 		retc70pom.sendPassword("admin@123");
 		retc70pom.clickSignInBtn();
 		// add new feature
@@ -80,6 +93,6 @@ public class RETC_070_TEST {
 	@AfterMethod
 	public void tearDown() throws Exception {
 		Thread.sleep(1000);
-		driver.quit();
+		//driver.quit();
 	}
 }
